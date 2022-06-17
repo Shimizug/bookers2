@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :users, only: [:show, :edit, :update, :destroy, :index]
+# booksコントローラのルーティング
+  resources :books, only: [:index, :show, :edit, :create, :destroy]
 # devise を使用する際に URL として users を含むことを示す
   devise_for :users
 # homesコントローラのルーティング

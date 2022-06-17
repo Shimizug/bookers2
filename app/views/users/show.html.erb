@@ -1,0 +1,61 @@
+<div class="container px-5 px-sm-0">
+  <div class="row"><!-- flex -->
+    <div class="col-md-3">
+      <!--ユーザー情報の表示-->
+      <h2>User info</h2>
+        <p>投稿ユーザー画像：<%= image_tag current_user.get_profile_image(100,100) %></p>
+        <table class="table">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <th>name</th>
+              <th><%= current_user.name %></th>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <th><%= current_user.introduction %></th>
+            </tr>
+          </tbody>
+        </table>
+      
+   
+      
+      
+      <div class="row">
+        <!--#ユーザー編集への画面-->
+        <%= link_to "ユーザー編集画面へ" edit_user_path(@user) %>
+      </div>
+      
+      <!--渡す値は@user = User.find(params[:id])-->
+      
+      <!--投稿機能-->
+      <h2>New book</h2>
+      <%= form_with model: @book do |f| %>
+        <label for="book-title">Title</label>
+          <%= f.text_field :title %>
+        <label for="book_option">Option</label>
+          <%= f.text_area :body %>
+        <%= f.submit 'Create Book' %>
+      <% end %>
+      
+      
+    </div>
+    
+  </div>
+</div>
+
+<!-- ユーザーの投稿一覧 -->
+
+<% @books.each do |post_image| %>
+<div>
+  <%= link_to books_path(books.id) do %>
+    <%= image_tag books.get_image %>
+  <% end %>
+  <p><%= image_tag book.user.get_profile_image(100,100) %></p>
+  <% if @user == current_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <% end %>
+  <p>name：<%= book.title%></p>
+  <p>option：<%= book.body %></p>
+</div>
+<% end %>

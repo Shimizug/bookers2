@@ -1,0 +1,12 @@
+<%= render 'books/list', book: @book, user: @user %>
+<h2>Users</h2>
+<%= @users.each do |user| %>
+  <%= link_to user_path(user.id) do %>
+    <%= image_tag user.get_profile_image %>
+  <% end %>
+  <p>Name</p>
+  <%= user.name %>
+  <p>Introduction</p>
+  <%= user.introduction %>
+<% end %>
+  
