@@ -1,12 +1,48 @@
-<%= render 'list', book: @book, user: @user %>
+<div class="container px-5 px-sm-0">
+  <div id="error_explanation">
+  <% if @book.errors.any? %>
+    <h3> <%= @book.errors.count %>error prohibited book from being saved:</h3>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li class="error-box"><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  </div>
 
-<h2>Books</h2>
-<% @books.each do |book1| %>
-<div>
-  <%= link_to book_path(book.id) do %>
-    <%= image_tag book1.get_profile_image(100,100) %> 
-  <% end
-  <p>Title：<%= book1.title %></p>
-  <p>Option：<%= book1.body %></p>
+  <div class="row"><!-- flex -->
+    <%= render 'list', book: @book, user: current_user %>
+    
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thread>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Option</th>
+            <th colspan="3"></th>
+          </tr>
+        </thread>
+        <tbody>
+          <% @books.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to user_path(book.user.id) do %>
+                <%= image_tag book.user.get_profile_image(100,100) %> 
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(book.id) do %>
+                <%= book.title %>
+              <% end %>
+            </td>
+            <td><%= book.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
 </div>
-<% end %>

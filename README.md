@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+* 
+#Bookers2
+
+###ruby on rails で作成したため、ブラウザで使用可能。
